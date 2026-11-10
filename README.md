@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BREA Interiors: website
 
-## Getting Started
+Marketing site for **BREA Interiors**, an interior design studio in Lagos, Nigeria ([@interior_bybrea](https://www.instagram.com/interior_bybrea/)).
 
-First, run the development server:
+Built with Next.js 16 (App Router, Cache Components) and Tailwind CSS v4. Black-and-white brand palette; the interiors supply the colour.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Pages
+
+| Route       | Purpose                                                                 |
+| ----------- | ----------------------------------------------------------------------- |
+| `/`         | Hero reel, studio intro, featured works, transformation, services, process, Instagram reels, enquiry form |
+| `/projects` | Every project with its walkthrough reel and gallery                     |
+| `/studio`   | About, stats, five-step process (`#process`), services                  |
+| `/enquire`  | Consultation and site-inspection booking form                          |
+
+## Editing content
+
+- **Business details, WhatsApp, email, phone:** `lib/site.ts` (or the env vars below)
+- **Projects and images:** `lib/projects.ts`
+- **Services, process steps, stats:** `lib/content.ts`
+- **Media:** `public/media/stills` (JPG stills taken from the reels) and `public/media/video` (web-compressed, muted reels)
+- **Logo:** `components/Wordmark.tsx` (vector, traced from the brand mark) and `public/brand/brea-wordmark.svg`
+
+## Enquiry routing
+
+The enquiry form needs no backend. On submit it builds a brief from the form fields and:
+
+1. opens **WhatsApp** with the brief prefilled, if `NEXT_PUBLIC_WHATSAPP` is set; otherwise
+2. opens an **email** draft, if `NEXT_PUBLIC_EMAIL` is set; otherwise
+3. copies the brief and opens an **Instagram DM** to @interior_bybrea.
+
+## Environment variables
+
+```
+NEXT_PUBLIC_SITE_URL=https://your-domain.com
+NEXT_PUBLIC_WHATSAPP=2348000000000   # digits only, international format
+NEXT_PUBLIC_EMAIL=hello@your-domain.com
+NEXT_PUBLIC_PHONE=+234 800 000 0000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm install
+npm run dev
+```
